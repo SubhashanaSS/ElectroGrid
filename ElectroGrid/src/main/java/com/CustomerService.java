@@ -30,7 +30,7 @@ public class CustomerService {
 	public String insertCustomer(@FormParam("CustomerName") String CustomerName,
 			@FormParam("CustomerAddress") String CustomerAddress, @FormParam("CustomerEmail") String CustomerEmail,
 			@FormParam("CustomerContact") String CustomerContact) {
-		String output = customerObj.insertCustomer(CustomerName, CustomerEmail, CustomerAddress, CustomerContact);
+		String output = customerObj.insertCustomer(CustomerName, CustomerAddress, CustomerEmail, CustomerContact);
 		return output;
 	}
 }
