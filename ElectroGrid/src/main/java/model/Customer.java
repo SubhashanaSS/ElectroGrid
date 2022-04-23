@@ -2,7 +2,9 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Customer {
@@ -62,4 +64,36 @@ public class Customer {
 		}
 		return output;
 	}
+	
+	// insert method
+		public String insertCustomer(String name, String address, String email, String contact) {
+			Connection con = connect();
+			String output = "";
+			if (con == null) {
+				return "Error while connecting to the database";
+			}
+
+			// create a prepared statement
+			String query = " insert into customers (`CustomerID`,`CustomerName`,`CustomerAddress`,`CustomerEmail`,`CustomerContact`)"
+					+ " values (?, ?, ?, ?, ?)";
+			PreparedStatement preparedStmt;
+			try {
+				preparedStmt = con.prepareStatement(query);
+
+				preparedStmt.setInt(1, 0);
+				preparedStmt.setString(2, name);
+				preparedStmt.setString(3, address);
+				preparedStmt.setString(4, email);
+				preparedStmt.setString(5, contact);
+
+				preparedStmt.execute();
+				con.close();
+				output = "Inserted successfully";
+			} catch (SQLException e) {
+				output = "Error while inserting";
+				System.err.println(e.getMessage());
+			}
+
+			return output;
+		}
 }
