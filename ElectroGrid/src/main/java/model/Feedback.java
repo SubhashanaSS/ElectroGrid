@@ -96,4 +96,37 @@ public class Feedback {
 				}
 				return output;
 			}
+			
+			//update feedback
+			public String updateFeedback(String ID, String name, String email, String rate, String notes)
+
+			{
+				String output = "";
+				try {
+					Connection con = connect();
+					if (con == null) {
+						return "Error while connecting to the database for updating.";
+					}
+					// create a prepared statement
+
+					String query = " update feedbacks set CustomerName= ? , CustomerEmail = ? , Rate = ? , FeedbackNotes = ?  where FeedbackID = ? ";
+
+					PreparedStatement preparedStmt = con.prepareStatement(query);
+					// binding values
+					preparedStmt.setString(1, name);
+					preparedStmt.setString(2, email);
+					preparedStmt.setString(3, rate);
+					preparedStmt.setString(4, notes);
+
+					preparedStmt.setInt(5, Integer.parseInt(ID));
+					// execute the statement
+					preparedStmt.execute();
+					con.close();
+					output = "Updated successfully";
+				} catch (Exception e) {
+					output = "Error while updating the customer.";
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}	
 }
