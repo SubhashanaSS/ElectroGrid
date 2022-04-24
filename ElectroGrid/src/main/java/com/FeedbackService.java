@@ -43,5 +43,21 @@ public class FeedbackService {
 			return feedbackObj.readFeedbacks();
 		}
 		
-		
+		@PUT
+		@Path("/")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
+		public String updateFeedback(String feedbackData) {
+			// Convert the input string to a JSON object
+			JsonObject feedbackObject = new JsonParser().parse(feedbackData).getAsJsonObject();
+			// Read the values from the JSON object
+			String FeedbackID = feedbackObject.get("FeedbackID").getAsString();
+			String CustomerName = feedbackObject.get("CustomerName").getAsString();
+			String CustomerEmail = feedbackObject.get("CustomerEmail").getAsString();
+			String Rate = feedbackObject.get("Rate").getAsString();
+			String FeedbackNotes = feedbackObject.get("FeedbackNotes").getAsString();
+			String output = feedbackObj.updateFeedback(FeedbackID, CustomerName, CustomerEmail, Rate,
+					FeedbackNotes);
+			return output;
+		}
 }
