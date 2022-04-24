@@ -39,7 +39,7 @@ public class FeedbackService {
 		@GET
 		@Path("/")
 		@Produces(MediaType.TEXT_HTML)
-		public String readCustomers() {
+		public String readFeedbacks() {
 			return feedbackObj.readFeedbacks();
 		}
 		
