@@ -98,5 +98,38 @@ public class Payment {
 				}
 				return output;
 			}
+			
+			// update payment
+			public String updatePayment(String ID, String amount, String number, String type, String date)
+
+			{
+				String output = "";
+				try {
+					Connection con = connect();
+					if (con == null) {
+						return "Error while connecting to the database for updating.";
+					}
+
+					String query = " update payments set Amount= ? , PaymentCardNo = ? , PaymentType = ? , PaymentDate = ?  where PaymentID = ? ";
+
+					PreparedStatement preparedStmt = con.prepareStatement(query);
+
+					// binding values
+					preparedStmt.setString(1, amount);
+					preparedStmt.setString(2, number);
+					preparedStmt.setString(3, type);
+					preparedStmt.setString(4, date);
+					preparedStmt.setInt(5, Integer.parseInt(ID));
+
+					// execute the statement
+					preparedStmt.execute();
+					con.close();
+					output = "Updated successfully";
+				} catch (Exception e) {
+					output = "Error while updating the Payment Details.";
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}
 
 }

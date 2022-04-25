@@ -42,4 +42,21 @@ Payment paymentObj = new Payment();
 	public String readPayments() {
 		return paymentObj.readPayments();
 	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updatePayment(String paymentData) {
+		// Convert the input string to a JSON object
+		JsonObject paymentObject = new JsonParser().parse(paymentData).getAsJsonObject();
+		// Read the values from the JSON object
+		String PaymentID = paymentObject.get("PaymentID").getAsString();
+		String Amount = paymentObject.get("Amount").getAsString();
+		String PaymentCardNo = paymentObject.get("PaymentCardNo").getAsString();
+		String PaymentType = paymentObject.get("PaymentType").getAsString();
+		String PaymentDate = paymentObject.get("PaymentDate").getAsString();
+		String output = paymentObj.updatePayment(PaymentID, Amount, PaymentCardNo, PaymentType, PaymentDate);
+		return output;
+	}
 }
