@@ -32,7 +32,7 @@ public class SupplierService {
 	public String insertSupplier(@FormParam("SupplierName") String SupplierName,
 			@FormParam("SupplySize") String SupplySize, @FormParam("EnergyType") String EnergyType,
 			@FormParam("SupplierStatus") String SupplierStatus) {
-		String output = supplierObj.insertSupplier(SupplierName, SupplySize, SupplySize, SupplierStatus);
+		String output = supplierObj.insertSupplier(SupplierName, SupplySize, EnergyType, SupplierStatus);
 		return output;
 	}
 	

@@ -116,7 +116,7 @@ public class Supplier {
 				preparedStmt.setString(1, name);
 				preparedStmt.setString(2, size);
 				preparedStmt.setString(3, type);
-				preparedStmt.setString(4, size);
+				preparedStmt.setString(4, status);
 
 				preparedStmt.setInt(5, Integer.parseInt(ID));
 				// execute the statement
