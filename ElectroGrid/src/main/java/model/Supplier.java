@@ -3,7 +3,9 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Supplier {
 	public Connection connect() {
@@ -51,6 +53,46 @@ public class Supplier {
 				System.err.println(e.getMessage());
 			}
 
+			return output;
+		}
+		
+		public String readSupplier() {
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for reading Suppliers.";
+				}
+				// Prepare the html table to be displayed
+				output = "<table border='1'><tr><th>Supplier Name</th><th>Supply Size</th>" + "<th>Energy Type</th>"
+						+ "<th>Supplier Status</th></tr>";
+
+				String query = "select * from suppliers";
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				// iterate through the rows in the result set
+				while (rs.next()) {
+					String SupplierID = Integer.toString(rs.getInt("SupplierID"));
+					String SupplierName = rs.getString("SupplierName");
+					String SupplySize = rs.getString("SupplySize");
+					String EnergyType = rs.getString("EnergyType");
+					String SupplierStatus = rs.getString("SupplierStatus");
+
+					// Add into the html table
+					output += "<tr><td>" + SupplierName + "</td>";
+					output += "<td>" + SupplySize + "</td>";
+					output += "<td>" + EnergyType + "</td>";
+					output += "<td>" + SupplierStatus + "</td>";
+				}
+				con.close();
+
+				output += "</table>";
+			}
+
+			catch (Exception e) {
+				output = "Error while reading the Suppliers.";
+				System.err.println(e.getMessage());
+			}
 			return output;
 		}
 }

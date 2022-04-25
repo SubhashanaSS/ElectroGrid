@@ -2,6 +2,7 @@ package com;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,6 +25,13 @@ public class SupplierService {
 			@FormParam("SupplierStatus") String SupplierStatus) {
 		String output = supplierObj.insertSupplier(SupplierName, SupplySize, SupplySize, SupplierStatus);
 		return output;
+	}
+	
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
+	public String readCustomers() {
+		return supplierObj.readSupplier();
 	}
 }
 
