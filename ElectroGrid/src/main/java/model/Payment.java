@@ -57,5 +57,46 @@ public class Payment {
 
 				return output;
 			}
+			
+			// read method
+			public String readPayments() {
+				String output = "";
+				try {
+					Connection con = connect();
+					if (con == null) {
+						return "Error while connecting to the database for reading.";
+					}
+					// Prepare the html table to be displayed
+					output = "<table border='1'><tr><th>Amount</th><th>Payment Card Number</th>" + "<th>Payment Type</th>"
+							+ "<th>PaymentDate</th></tr>";
+
+					String query = "select * from payments";
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery(query);
+					// iterate through the rows in the result set
+					while (rs.next()) {
+						String PaymentID = Integer.toString(rs.getInt("PaymentID"));
+						String Amount = rs.getString("Amount");
+						String CardNumber = rs.getString("PaymentCardNo");
+						String PaymentType = rs.getString("PaymentType");
+						String PaymentDate = rs.getString("PaymentDate");
+
+						// Add into the html table
+						output += "<tr><td>" + Amount + "</td>";
+						output += "<td>" + CardNumber + "</td>";
+						output += "<td>" + PaymentType + "</td>";
+						output += "<td>" + PaymentDate + "</td>";
+
+					}
+					con.close();
+
+					// Complete the html table
+					output += "</table>";
+				} catch (Exception e) {
+					output = "Error while reading the payment Details.";
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}
 
 }

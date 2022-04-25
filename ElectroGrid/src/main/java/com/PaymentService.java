@@ -35,4 +35,11 @@ Payment paymentObj = new Payment();
 		String output = paymentObj.insertPayment(Amount, PaymentCardNo, PaymentType, PaymentDate);
 		return output;
 	}
+	
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
+	public String readPayments() {
+		return paymentObj.readPayments();
+	}
 }
