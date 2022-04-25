@@ -24,7 +24,7 @@ public class Supplier {
 		return con;
 	}
 	
-	// insert method
+	// insert supplier
 		public String insertSupplier(String name, String size, String type, String status) {
 			Connection con = connect();
 			String output = "";
@@ -56,6 +56,7 @@ public class Supplier {
 			return output;
 		}
 		
+		//read supplier
 		public String readSupplier() {
 			String output = "";
 			try {
@@ -96,6 +97,7 @@ public class Supplier {
 			return output;
 		}
 		
+		//update supplier
 		public String updateSupplier(String ID, String name, String size, String type, String status)
 
 		{
@@ -123,6 +125,30 @@ public class Supplier {
 				output = "Updated successfully";
 			} catch (Exception e) {
 				output = "Error while updating the supplier.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+		
+		//delete supplier
+		public String deleteSupplier(String SupplierID) {
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for deleting.";
+				}
+				// create a prepared statement
+				String query = "delete from suppliers where SupplierID=?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				// binding values
+				preparedStmt.setInt(1, Integer.parseInt(SupplierID));
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Deleted successfully";
+			} catch (Exception e) {
+				output = "Error while deleting the Supplier.";
 				System.err.println(e.getMessage());
 			}
 			return output;

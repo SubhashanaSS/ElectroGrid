@@ -62,7 +62,7 @@ public class Feedback {
 				try {
 					Connection con = connect();
 					if (con == null) {
-						return "Error while connecting to the database for reading Customers.";
+						return "Error while connecting to the database for reading Feedbacks.";
 					}
 					// Prepare the html table to be displayed
 					output = "<table border='1'><tr><th>Customer Name</th><th>Customer Email</th>" + "<th>Feedback Rate</th>"
@@ -91,7 +91,7 @@ public class Feedback {
 				}
 
 				catch (Exception e) {
-					output = "Error while reading the Customers.";
+					output = "Error while reading the Feedbacks.";
 					System.err.println(e.getMessage());
 				}
 				return output;
@@ -124,7 +124,7 @@ public class Feedback {
 					con.close();
 					output = "Updated successfully";
 				} catch (Exception e) {
-					output = "Error while updating the customer.";
+					output = "Error while updating the Feedback.";
 					System.err.println(e.getMessage());
 				}
 				return output;
@@ -148,7 +148,7 @@ public class Feedback {
 					con.close();
 					output = "Deleted successfully";
 				} catch (Exception e) {
-					output = "Error while deleting the Customer.";
+					output = "Error while deleting the Feedback.";
 					System.err.println(e.getMessage());
 				}
 				return output;
