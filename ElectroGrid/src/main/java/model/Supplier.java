@@ -95,5 +95,37 @@ public class Supplier {
 			}
 			return output;
 		}
+		
+		public String updateSupplier(String ID, String name, String size, String type, String status)
+
+		{
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for updating.";
+				}
+				// create a prepared statement
+
+				String query = " update suppliers set SupplierName= ? , SupplySize = ? , EnergyType = ? , SupplierStatus = ?  where SupplierID = ? ";
+
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				// binding values
+				preparedStmt.setString(1, name);
+				preparedStmt.setString(2, size);
+				preparedStmt.setString(3, type);
+				preparedStmt.setString(4, size);
+
+				preparedStmt.setInt(5, Integer.parseInt(ID));
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Updated successfully";
+			} catch (Exception e) {
+				output = "Error while updating the supplier.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
 }
 

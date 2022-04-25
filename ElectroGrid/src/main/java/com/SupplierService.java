@@ -4,9 +4,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import model.Supplier;
 
@@ -30,8 +34,26 @@ public class SupplierService {
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
-	public String readCustomers() {
+	public String readSupplier() {
 		return supplierObj.readSupplier();
+	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateSupplier(String supplierData) {
+		// Convert the input string to a JSON object
+		JsonObject supplierObject = new JsonParser().parse(supplierData).getAsJsonObject();
+		// Read the values from the JSON object
+		String SupplierID = supplierObject.get("SupplierID").getAsString();
+		String SupplierName = supplierObject.get("SupplierName").getAsString();
+		String SupplySize = supplierObject.get("SupplySize").getAsString();
+		String EnergyType = supplierObject.get("EnergyType").getAsString();
+		String SupplierStatus = supplierObject.get("SupplierStatus").getAsString();
+		String output = supplierObj.updateSupplier(SupplierID, SupplierName, SupplySize, EnergyType,
+				SupplierStatus);
+		return output;
 	}
 }
 
