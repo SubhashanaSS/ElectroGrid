@@ -11,10 +11,10 @@ Import the electrogrid DB then clone the project and after it become cloned by u
 https://github.com/SubhashanaSS/ElectroGrid/blob/master/electrogrid.sql
 
 # Collaborators
-Samaranayake S. IT20139612
-Sooryasena R.S A. IT20088378
-Weerasinghe P.P. IT20242190
-Ariyarathna U.G.I.P. IT20223908 
+Samaranayake S. IT20139612,
+Sooryasena R.S A. IT20088378,
+Weerasinghe P.P. IT20242190,
+Ariyarathna U.G.I.P. IT20223908, 
 
 # How to set the path?
  http://localhost:8081/ElectroGrid/CustomerService/Customers -- Customer Service
