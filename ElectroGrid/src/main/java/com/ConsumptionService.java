@@ -29,7 +29,7 @@ public class ConsumptionService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String insertConsumption(@FormParam("CustomerName") String CustomerName,
+	public String insertConsumption(@ FormParam("CustomerName") String CustomerName,
 			@FormParam("CustomerUsage") String CustomerUsage, @FormParam("Price") String Price,
 			@FormParam("CustomerType") String CustomerType) {
 		String output = consumptionObj.insertConsumption(CustomerName, CustomerUsage, Price, CustomerType);
